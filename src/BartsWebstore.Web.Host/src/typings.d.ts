@@ -20,6 +20,7 @@ declare var Push: any;
 
 interface JQuery {
     countTo(...any): any;
+    datetimepicker(...any): any;
 }
 
 interface JQuery {
@@ -29,3 +30,7 @@ interface JQuery {
 interface JQueryStatic {
     AdminBSB: any;
 }
+
+// interface JQuery {
+//   
+// }

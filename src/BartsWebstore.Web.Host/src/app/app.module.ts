@@ -37,6 +37,11 @@ import { CreateUserDialogComponent } from '@app/users/create-user/create-user-di
 import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 import { ResetPasswordDialogComponent } from './users/reset-password/reset-password.component';
+import {EventsComponent} from "@app/events/events.component";
+import {CreateEventComponent} from "@app/events/create-event/create-event.component";
+import {EventDetailComponent} from "@app/events/event-detail/event-detail.component";
+import {EventServiceProxy} from "@shared/service-proxies/service-proxies";
+import {PermissionCheckerService} from "@abp/auth/permission-checker.service";
 
 @NgModule({
   declarations: [
@@ -62,7 +67,11 @@ import { ResetPasswordDialogComponent } from './users/reset-password/reset-passw
     CreateUserDialogComponent,
     EditUserDialogComponent,
     ChangePasswordComponent,
-    ResetPasswordDialogComponent
+    ResetPasswordDialogComponent,
+      // events
+      EventsComponent,
+      CreateEventComponent,
+      EventDetailComponent
   ],
   imports: [
     CommonModule,
@@ -77,7 +86,11 @@ import { ResetPasswordDialogComponent } from './users/reset-password/reset-passw
     SharedModule,
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [
+    EventServiceProxy,
+    PermissionCheckerService
+      
+  ],
   entryComponents: [
     // tenants
     CreateTenantDialogComponent,

@@ -15,7 +15,7 @@ namespace BartsWebstore.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -1034,6 +1034,70 @@ namespace BartsWebstore.Migrations
                     b.ToTable("AbpUsers");
                 });
 
+            modelBuilder.Entity("BartsWebstore.Events.Event", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<long?>("CreatorUserId");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<long?>("DeleterUserId");
+
+                    b.Property<DateTime?>("DeletionTime");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2048);
+
+                    b.Property<bool>("IsCancelled");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime");
+
+                    b.Property<long?>("LastModifierUserId");
+
+                    b.Property<int>("MaxRegistrationCount");
+
+                    b.Property<int>("TenantId");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(128);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppEvents");
+                });
+
+            modelBuilder.Entity("BartsWebstore.Events.EventRegistration", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<long?>("CreatorUserId");
+
+                    b.Property<Guid>("EventId");
+
+                    b.Property<int>("TenantId");
+
+                    b.Property<long>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AppEventRegistrations");
+                });
+
             modelBuilder.Entity("BartsWebstore.MultiTenancy.Tenant", b =>
                 {
                     b.Property<int>("Id")
@@ -1232,6 +1296,19 @@ namespace BartsWebstore.Migrations
                     b.HasOne("BartsWebstore.Authorization.Users.User", "LastModifierUser")
                         .WithMany()
                         .HasForeignKey("LastModifierUserId");
+                });
+
+            modelBuilder.Entity("BartsWebstore.Events.EventRegistration", b =>
+                {
+                    b.HasOne("BartsWebstore.Events.Event", "Event")
+                        .WithMany("Registrations")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("BartsWebstore.Authorization.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BartsWebstore.MultiTenancy.Tenant", b =>

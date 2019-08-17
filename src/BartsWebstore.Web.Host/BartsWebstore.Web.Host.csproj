@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
@@ -58,11 +58,16 @@
     <None Remove="external_libs\**" />
     <None Remove="node_modules\**" />
   </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\app\events\create-event\create-event.component.ts" />
+    <TypeScriptCompile Include="src\app\events\event-detail\event-detail.component.ts" />
+    <TypeScriptCompile Include="src\app\events\events.component.ts" />
+  </ItemGroup>
   <Target Name="PrepublishScript" BeforeTargets="ComputeFilesToPublish">
     <Exec Command="ng build --prod" />
     <ItemGroup>
       <DistFiles Include="wwwroot\**\*" />
-      <ResolvedFileToPublish Include="@(DistFiles-&gt;'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
         <RelativePath>%(DistFiles.Identity)</RelativePath>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       </ResolvedFileToPublish>

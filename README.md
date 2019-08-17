@@ -6,7 +6,7 @@ Create & download your project first from https://aspnetboilerplate.com/Template
 
 1. Create a new Database EventCloudDb in SQL Server
  
-2. Change ConnectionStrings->default: in appsettings.json of EventCloud.Web.Host project
+2. Change ConnectionStrings-> Default: in appsettings.json of EventCloud.Web.Host project
 
 3. In Package Manager Console, select the EntityFrameworkCore project and run `database-update` command
 

@@ -39,6 +39,7 @@
               "node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.css",
               "node_modules/toastr/build/toastr.css",
               "node_modules/node-waves/dist/waves.css",
+              "node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css",
               "src/bsb-theme/css/materialize.css",
               "src/bsb-theme/css/style.css",
               "src/bsb-theme/css/themes/all-themes.css",
@@ -77,6 +78,7 @@
               "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
               "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
               "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js",
+              "node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
               "src/bsb-theme/js/admin.js",
               "src/bsb-theme/js/demo.js",
               "src/bsb-theme/js/jquery.validate.js"

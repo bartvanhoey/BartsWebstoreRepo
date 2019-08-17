@@ -25,7 +25,7 @@ namespace BartsWebstore.Identity
                 .AddAbpSignInManager<SignInManager>()
                 .AddAbpSecurityStampValidator<SecurityStampValidator>()
                 .AddAbpUserClaimsPrincipalFactory<UserClaimsPrincipalFactory>()
-                .AddPermissionChecker<PermissionChecker>()
+                .AddPermissionChecker<PermissionChecker<Role,User>>()
                 .AddDefaultTokenProviders();
         }
     }

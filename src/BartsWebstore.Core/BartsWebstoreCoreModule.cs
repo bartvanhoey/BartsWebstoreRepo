@@ -3,6 +3,7 @@ using Abp.Reflection.Extensions;
 using Abp.Timing;
 using Abp.Zero;
 using Abp.Zero.Configuration;
+using BartsWebstore.Authorization;
 using BartsWebstore.Authorization.Roles;
 using BartsWebstore.Authorization.Users;
 using BartsWebstore.Configuration;
@@ -33,6 +34,7 @@ namespace BartsWebstore
             AppRoleConfig.Configure(Configuration.Modules.Zero().RoleManagement);
 
             Configuration.Settings.Providers.Add<AppSettingProvider>();
+            
         }
 
         public override void Initialize()

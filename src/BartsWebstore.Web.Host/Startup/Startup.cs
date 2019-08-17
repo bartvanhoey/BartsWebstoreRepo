@@ -17,7 +17,14 @@ using BartsWebstore.Configuration;
 using BartsWebstore.Identity;
 
 using Abp.AspNetCore.SignalR.Hubs;
+using Abp.Authorization;
+using Abp.Authorization.Roles;
+using Abp.Authorization.Users;
+using BartsWebstore.Authorization.Roles;
+using BartsWebstore.Authorization.Users;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace BartsWebstore.Web.Host.Startup
 {
@@ -43,6 +50,14 @@ namespace BartsWebstore.Web.Host.Startup
             AuthConfigurer.Configure(services, _appConfiguration);
 
             services.AddSignalR();
+            
+            //AbpUserManager
+            services.TryAddScoped<AbpUserManager<Role, User>>();
+            services.TryAddScoped(typeof(UserManager<User>), provider => provider.GetService(typeof(AbpUserManager<Role, User>)));
+            
+            //PermissionChecker
+            services.TryAddScoped<PermissionChecker<Role,User>>();
+            services.TryAddScoped(typeof(IPermissionChecker), provider => provider.GetService(typeof(PermissionChecker<Role, User>)));
 
             // Configure CORS for angular2 UI
             services.AddCors(

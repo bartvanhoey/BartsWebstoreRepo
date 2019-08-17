@@ -1,4 +1,4 @@
-﻿(function() {
+﻿(function () {
     if (typeof jQuery === "undefined") {
         throw new Error("jQuery plugins need to be before this file");
     }
@@ -56,7 +56,9 @@
             //Close sidebar
             $(window).click(function (e) {
                 var $target = $(e.target);
-                if (e.target.nodeName.toLowerCase() === 'i') { $target = $(e.target).parent(); }
+                if (e.target.nodeName.toLowerCase() === 'i') {
+                    $target = $(e.target).parent();
+                }
 
                 if (!$target.hasClass('bars') && _this.isOpen() && $target.parents('#leftsidebar').length === 0) {
                     if (!$target.hasClass('js-right-sidebar')) $overlay.fadeOut();
@@ -128,7 +130,7 @@
                     var $activeItem = $('.menu .list li.active');
                     if ($activeItem.length) {
                         var activeItemOffsetTop = $activeItem[0].offsetTop;
-                        if (activeItemOffsetTop > 150) $el.slimscroll({ scrollTo: activeItemOffsetTop + 'px' });
+                        if (activeItemOffsetTop > 150) $el.slimscroll({scrollTo: activeItemOffsetTop + 'px'});
                     }
                 }
             }
@@ -147,8 +149,7 @@
             if (width < $.AdminBSB.options.leftSideBar.breakpointWidth) {
                 $body.addClass('ls-closed');
                 $openCloseBar.fadeIn();
-            }
-            else {
+            } else {
                 $body.removeClass('ls-closed');
                 $openCloseBar.fadeOut();
             }
@@ -172,7 +173,9 @@
             //Close sidebar
             $(window).click(function (e) {
                 var $target = $(e.target);
-                if (e.target.nodeName.toLowerCase() === 'i') { $target = $(e.target).parent(); }
+                if (e.target.nodeName.toLowerCase() === 'i') {
+                    $target = $(e.target).parent();
+                }
 
                 if (!$target.hasClass('js-right-sidebar') && _this.isOpen() && $target.parents('#rightsidebar').length === 0) {
                     if (!$target.hasClass('bars')) $overlay.fadeOut();
@@ -182,7 +185,11 @@
 
             $('.js-right-sidebar').on('click', function () {
                 $sidebar.toggleClass('open');
-                if (_this.isOpen()) { $overlay.fadeIn(); } else { $overlay.fadeOut(); }
+                if (_this.isOpen()) {
+                    $overlay.fadeIn();
+                } else {
+                    $overlay.fadeOut();
+                }
             });
         },
         isOpen: function () {
@@ -243,7 +250,11 @@
             //Open left sidebar panel
             $('.bars').on('click', function () {
                 $body.toggleClass('overlay-open');
-                if ($body.hasClass('overlay-open')) { $overlay.fadeIn(); } else { $overlay.fadeOut(); }
+                if ($body.hasClass('overlay-open')) {
+                    $overlay.fadeIn();
+                } else {
+                    $overlay.fadeOut();
+                }
             });
 
             //Close collapse bar on click event
@@ -255,6 +266,45 @@
                     $navbarCollapse.slideUp(function () {
                         $navbarCollapse.removeClass('in').removeAttr('style');
                     });
+                }
+            });
+        }
+    }
+
+    /* Input - Function ========================================================================================================
+*  You can manage the inputs(also textareas) with name of class 'form-control'
+*  
+*/
+    $.AdminBSB.input = {
+        activate: function ($parentSelector) {
+            $parentSelector = $parentSelector || $('body');
+
+            //On focus event
+            $parentSelector.find('.form-control').focus(function () {
+                $(this).parent().addClass('focused');
+            });
+
+            //On focusout event
+            $parentSelector.find('.form-control').focusout(function () {
+                var $this = $(this);
+                if ($this.parents('.form-group').hasClass('form-float')) {
+                    if ($this.val() == '') {
+                        $this.parents('.form-line').removeClass('focused');
+                    }
+                } else {
+                    $this.parents('.form-line').removeClass('focused');
+                }
+            });
+
+            //On label click
+            $parentSelector.on('click', '.form-float .form-line .form-label', function () {
+                $(this).parent().find('input').focus();
+            });
+
+            //Not blank form
+            $parentSelector.find('.form-control').each(function () {
+                if ($(this).val() !== '') {
+                    $(this).parents('.form-line').addClass('focused');
                 }
             });
         }
